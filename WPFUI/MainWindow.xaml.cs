@@ -41,7 +41,13 @@ namespace WPFUI
             //InsertStudentLectureAssociations();
             //GetUniversityOfToni();
 
-            GetToniLectures();
+            //GetToniLectures();
+
+            //GetAllStudentsFromYale();
+
+            //GetAllUniversitiesWithTransgenders();
+
+            GetAllLecturesFromBejingTech();
         }
 
         public void InsertUniversities()
@@ -156,6 +162,37 @@ namespace WPFUI
 
 
             MainDataGrid.ItemsSource = tonisLectures;
+        }
+
+        public void GetAllStudentsFromYale()
+        {
+            var studentsFromYale = from student in dataContext.Students
+                                   where student.University.Name == "Yale"
+                                   select student;
+
+            MainDataGrid.ItemsSource = studentsFromYale;
+        }
+
+        public void GetAllUniversitiesWithTransgenders()
+        {
+            var transgenderUnivesities = from student in dataContext.Students
+                                         join university in dataContext.Universities
+                                         on student.University equals university
+                                         where student.Gender == "trans-gender"
+                                         select university;
+
+            MainDataGrid.ItemsSource = transgenderUnivesities;
+        }
+
+        public void GetAllLecturesFromBejingTech()
+        {
+            var beijingLectures = from sl in dataContext.StudentLectures
+                                  join student in dataContext.Students
+                                  on sl.StudentId equals student.Id
+                                  where student.University.Name == "Beijing Tech"
+                                  select sl.Lecture;
+
+            MainDataGrid.ItemsSource = beijingLectures;
         }
     }
 }
