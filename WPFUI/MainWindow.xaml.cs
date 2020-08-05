@@ -47,7 +47,11 @@ namespace WPFUI
 
             //GetAllUniversitiesWithTransgenders();
 
-            GetAllLecturesFromBejingTech();
+            //GetAllLecturesFromBejingTech();
+            //UpdateToni();
+            //DeleteJames();
+
+            MainDataGrid.ItemsSource = dataContext.Students;
         }
 
         public void InsertUniversities()
@@ -193,6 +197,30 @@ namespace WPFUI
                                   select sl.Lecture;
 
             MainDataGrid.ItemsSource = beijingLectures;
+        }
+
+        public void UpdateToni()
+        {
+            Student Toni = dataContext.Students.FirstOrDefault(st
+                => st.Name == "Toni");
+
+            Toni.Name = "Antonio";
+
+            dataContext.SubmitChanges();
+
+            MainDataGrid.ItemsSource = dataContext.Students;
+        }
+
+        public void DeleteJames()
+        {
+            Student James = dataContext.Students.FirstOrDefault(st
+                => st.Name == "James");
+
+            dataContext.Students.DeleteOnSubmit(James);
+
+            dataContext.SubmitChanges();
+
+            MainDataGrid.ItemsSource = dataContext.Students;
         }
     }
 }
