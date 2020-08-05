@@ -34,7 +34,14 @@ namespace WPFUI
 
             //InsertUniversities();
 
-            InsertStudents();
+            //InsertStudents();
+
+            //InsertLectures();
+
+            //InsertStudentLectureAssociations();
+            //GetUniversityOfToni();
+
+            GetToniLectures();
         }
 
         public void InsertUniversities()
@@ -74,6 +81,81 @@ namespace WPFUI
             dataContext.SubmitChanges();
 
             MainDataGrid.ItemsSource = dataContext.Students;
+        }
+
+        public void InsertLectures()
+        {
+            dataContext.Lectures.InsertOnSubmit(new Lecture { Name = "Math" });
+            dataContext.Lectures.InsertOnSubmit(new Lecture { Name = "History" });
+
+            dataContext.SubmitChanges();
+
+            MainDataGrid.ItemsSource = dataContext.Lectures;
+        }
+
+        public void InsertStudentLectureAssociations()
+        {
+            Student Carla = dataContext.Students.First(st => st.Name.Equals("Carla"));
+            Student Toni = dataContext.Students.First(st => st.Name.Equals("Toni"));
+            Student Leyla = dataContext.Students.First(st => st.Name.Equals("Leyla"));
+            Student James = dataContext.Students.First(st => st.Name.Equals("James"));
+
+            Lecture Math = dataContext.Lectures.First(lc => lc.Name.Equals("Math"));
+            Lecture History = dataContext.Lectures.First(lc => lc.Name.Equals("History"));
+
+            dataContext.StudentLectures.InsertOnSubmit(new StudentLecture
+            {
+                Student = Carla,
+                Lecture = Math
+            });
+
+            dataContext.StudentLectures.InsertOnSubmit(new StudentLecture
+            {
+                Student = Toni,
+                Lecture = Math
+            });
+
+            // Another way to insert
+            StudentLecture slToni = new StudentLecture();
+            slToni.Student = Toni;
+            slToni.LectureId = History.Id;
+            dataContext.StudentLectures.InsertOnSubmit(slToni);
+
+            dataContext.StudentLectures.InsertOnSubmit(new StudentLecture
+            {
+                Student = Leyla,
+                Lecture = History
+            });
+
+            dataContext.SubmitChanges();
+
+            MainDataGrid.ItemsSource = dataContext.StudentLectures;
+
+        }
+
+        public void GetUniversityOfToni()
+        {
+            Student Toni = dataContext.Students.First(st => st.Name.Equals("Toni"));
+
+            University ToniUniversity = Toni.University;
+            List<University> universities = new List<University>();
+
+            universities.Add(ToniUniversity);
+
+
+            MainDataGrid.ItemsSource = universities;
+        }
+
+
+        public void GetToniLectures()
+        {
+            Student Toni = dataContext.Students.First(st => st.Name.Equals("Toni"));
+
+            var tonisLectures = from sl in Toni.StudentLectures
+                                select sl.Lecture;
+
+
+            MainDataGrid.ItemsSource = tonisLectures;
         }
     }
 }

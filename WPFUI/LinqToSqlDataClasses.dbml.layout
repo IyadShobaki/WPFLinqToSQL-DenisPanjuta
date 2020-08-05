@@ -21,5 +21,31 @@
         <classShapeMoniker Id="129c0498-c6ac-4847-a798-794221ac2e76" />
       </nodes>
     </associationConnector>
+    <classShape Id="0e43e18c-a207-469f-b00c-cffe3c23fa3c" absoluteBounds="2.125, 3, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/LinqToSqlDataClassesDataContext/Lecture" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6d019278-299d-4daf-96dc-2726cacfdfef" absoluteBounds="2.1399999999999997, 3.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="010330ed-a69f-4dd4-bb95-c516bed86da9" absoluteBounds="4.875, 4.375, 2, 1.3862939453125">
+      <DataClassMoniker Name="/LinqToSqlDataClassesDataContext/StudentLecture" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a3c15a32-39c3-4efe-9590-6a9252edc7c3" absoluteBounds="4.89, 4.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.125 : 3.9800439453125); (5.40625 : 3.9800439453125); (5.40625 : 4.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LinqToSqlDataClassesDataContext/Lecture/Lecture_StudentLecture" />
+      <nodes>
+        <classShapeMoniker Id="0e43e18c-a207-469f-b00c-cffe3c23fa3c" />
+        <classShapeMoniker Id="010330ed-a69f-4dd4-bb95-c516bed86da9" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.4375 : 3.70359537760417); (6.4375 : 4.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LinqToSqlDataClassesDataContext/Student/Student_StudentLecture" />
+      <nodes>
+        <classShapeMoniker Id="129c0498-c6ac-4847-a798-794221ac2e76" />
+        <classShapeMoniker Id="010330ed-a69f-4dd4-bb95-c516bed86da9" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>
